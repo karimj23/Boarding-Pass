@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Gui {
@@ -24,6 +25,7 @@ public class Gui {
     private JTextField destination = new JTextField(20);
     private JTextField departureTime = new JTextField(20);
     private JButton submit = new JButton("Submit");
+
     public Gui()
     {
         frame = new JFrame(title);
@@ -54,7 +56,7 @@ public class Gui {
         label = new JLabel("Destination:");
         panelCenter.add(label);
         panelCenter.add(destination);
-        label = new JLabel("Depart.Time");
+        label = new JLabel("Depart Time:");
         panelCenter.add(label);
         panelCenter.add(departureTime);
         //panel.add(submit);
@@ -74,7 +76,6 @@ public class Gui {
         //frame.pack();
         frame.setVisible(true);
     }
-
     public Object returnFields()
     {
         ArrayList output = new ArrayList();
@@ -90,7 +91,23 @@ public class Gui {
         {
             System.out.println(output.get(i));
         }
+        try {
+            File file = new File("Passenger.txt");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file,true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            pw.print("");
+            pw.println(output);
+            pw.close();
+            System.out.println("Data successfully appended at the end of file");
+        }catch(IOException ioe) {
+            System.out.println("Exception occurred:");
+            ioe.printStackTrace();
+            {
+            }
+        }
         return output;
-    }
-
-}
+    }}

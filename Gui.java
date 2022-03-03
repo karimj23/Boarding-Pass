@@ -4,8 +4,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.*;
 import java.util.ArrayList;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+import java.io.IOException;
+
 
 public class Gui {
     private final String title = "Boarding Ticket";
@@ -24,8 +30,8 @@ public class Gui {
     private JTextField date = new JTextField(20);
     private JTextField destination = new JTextField(20);
     private JTextField departureTime = new JTextField(20);
+    private JTextField origin = new JTextField(20);
     private JButton submit = new JButton("Submit");
-
     public Gui()
     {
         frame = new JFrame(title);
@@ -53,10 +59,13 @@ public class Gui {
         label = new JLabel("Date:");
         panelCenter.add(label);
         panelCenter.add(date);
+        label = new JLabel("Origin:");
+        panelCenter.add(label);
+        panelCenter.add(origin);
         label = new JLabel("Destination:");
         panelCenter.add(label);
         panelCenter.add(destination);
-        label = new JLabel("Depart Time:");
+        label = new JLabel("Depart.Time");
         panelCenter.add(label);
         panelCenter.add(departureTime);
         //panel.add(submit);
@@ -76,7 +85,8 @@ public class Gui {
         //frame.pack();
         frame.setVisible(true);
     }
-    public Object returnFields()
+
+    public ArrayList<String>returnFields()
     {
         ArrayList output = new ArrayList();
         output.add(name.getText());
@@ -86,6 +96,7 @@ public class Gui {
         output.add(age.getText());
         output.add(date.getText());
         output.add(destination.getText());
+        output.add(origin.getText());
         output.add(departureTime.getText());
         for(int i = 0; i < output.size(); i++)
         {
@@ -106,8 +117,7 @@ public class Gui {
         }catch(IOException ioe) {
             System.out.println("Exception occurred:");
             ioe.printStackTrace();
-            {
-            }
         }
         return output;
-    }}
+    }
+}
